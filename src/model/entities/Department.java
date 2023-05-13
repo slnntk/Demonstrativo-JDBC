@@ -1,9 +1,16 @@
 package model.entities;
 
-public abstract class Department {
+public class Department {
 
     private Integer id;
     private String name;
+
+    public Department() {
+    }
+
+    public Department(String name) {
+        this.name = name;
+    }
 
     public Department(Integer id, String name) {
         this.id = id;
