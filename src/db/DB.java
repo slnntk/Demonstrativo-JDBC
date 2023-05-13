@@ -29,8 +29,10 @@ public class DB {
             Properties ps = new Properties();
             ps.load(fs);
             return ps;
+        } catch (FileNotFoundException e) {
+            throw new DbException("File not found");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new DbException(e.getMessage());
         }
     }
 
@@ -39,7 +41,7 @@ public class DB {
             try{
                 conn.close();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                throw new DbException(e.getMessage());
             }
         }
     }
@@ -49,16 +51,16 @@ public class DB {
             try{
                 st.close();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                throw new DbException(e.getMessage());
             }
         }
     }
-    public static void closeConnection(ResultSet rs){
+    public static void closeResultSet(ResultSet rs){
         if (rs != null){
             try{
                 rs.close();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                throw new DbException(e.getMessage());
             }
         }
     }
